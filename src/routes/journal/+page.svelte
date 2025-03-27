@@ -5,12 +5,39 @@
   let challenge = $state('');
   let reflection = $state('');
   let feeling = $state(5);
+  let aiResponse = $state('');
+
+  async function handleSubmit(){
+
+    const prompt = `
+    You are a journaling assistant. Based on the user's entries, write a kind and positive reflection on the day. End with one small suggestion for tomorrow.
+
+    Gratitude: ${gratitude}
+    Challenge: ${challenge}
+    Reflection: ${reflection}
+    Mood (0-10): ${feeling}
+    `;
+
+    const res = await fetch('/api/advice', {
+
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ prompt })
+
+    });
+
+    const data = await res.json();
+    aiResponse = data.choices[0].message.content;
+  };
+
+
 </script>
   
 <h1>Welcome to your journal</h1>
 <p>Logged in as: {data.userId}</p>
 
-<form method="POST">
+<form onsubmit={handleSubmit}>
+
 
   <div class="formWrapper flex flex-col">
 
@@ -31,4 +58,13 @@
 </div>
 
 </form>
+
+{#if aiResponse}
+
+  <div class="ai-response">
+    <h2>AI Reflection</h2>
+    <p>{aiResponse}</p>
+  </div>
+
+{/if }
   
