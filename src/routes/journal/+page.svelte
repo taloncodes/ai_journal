@@ -1,6 +1,10 @@
 <script>
   let { data } = $props();
   console.log(data.userId);
+  let gratitude = $state('');
+  let challenge = $state('');
+  let reflection = $state('');
+  let feeling = $state(5);
 </script>
   
 <h1>Welcome to your journal</h1>
@@ -10,14 +14,17 @@
 
   <div class="formWrapper flex flex-col">
 
-  <label for="prompt1">Prompt 1</label>
-  <input name="prompt1" type="text">
+  <label for="gratitude">What are you grateful for today?</label>
+  <input id="gratitude" name="gratitude" type="text" bind:value={gratitude} placeholder="Write something that you're grateful for..." required>
 
-  <label for="prompt2">Prompt 2</label>
-  <input name="prompt2" type="text">
+  <label for="challenge">What was a difficult situation or feeling you experienced today?</label>
+  <input id="challenge" name="challenge" type="text" bind:value={challenge} placeholder="Describe a challenge you faced..." required>
 
-  <label for="prompt3">Prompt 3</label>
-  <input name="prompt3" type="text">
+  <label for="reflection">What is something you've learned or want to reflect on today?</label>
+  <input id="reflection" name="reflection" type="text" bind:value={reflection} placeholder="Reflect on the day..." required>
+
+  <label for="feeling">How are you feeling?</label>
+  <input type="range" id="feeling" name="feeling" bind:value={feeling} min="0" max="10" step="1"/>
 
   <button type="submit">Submit</button>
 
