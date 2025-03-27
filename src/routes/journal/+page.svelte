@@ -1,4 +1,6 @@
 <script>
+	import { page } from '$app/state';
+
   let { data } = $props();
   console.log(data.userId);
   let gratitude = $state('');
@@ -6,6 +8,11 @@
   let reflection = $state('');
   let feeling = $state(5);
   let aiResponse = $state('');
+  let userId = data.userId;
+  let alreadySubmitted = data.alreadySubmitted;
+  let entry = data.entry;
+
+  console.log(userId, alreadySubmitted, entry);
 
   async function handleSubmit(){
 
@@ -28,6 +35,19 @@
 
     const data = await res.json();
     aiResponse = data.choices[0].message.content;
+
+    await fetch('api/save-journal', {
+
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        gratitude,
+        challenge,
+        reflection,
+        feeling,
+        aiResponse
+      })
+    });
   };
 
 
@@ -35,6 +55,18 @@
   
 <h1>Welcome to your journal</h1>
 <p>Logged in as: {data.userId}</p>
+
+{#if alreadySubmitted}
+<div class="entry-preview">
+  <h2>You've already submitted today's entry:</h2>
+  <p><strong>Gratitude:</strong> {entry.gratitude}</p>
+  <p><strong>Challenge:</strong> {entry.challenge}</p>
+  <p><strong>Reflection:</strong> {entry.reflection}</p>
+  <p><strong>Feeling:</strong> {entry.feeling}</p>
+  <p><strong>AI Summary:</strong> {entry.aiResponse}</p>
+</div>
+
+{:else}
 
 <form onsubmit={handleSubmit}>
 
@@ -58,6 +90,7 @@
 </div>
 
 </form>
+{/if}
 
 {#if aiResponse}
 
