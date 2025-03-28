@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 
 	let { data } = $props();
@@ -45,9 +46,19 @@
 </script>
 
 <main class="min-h-screen pb-20 text-[var(--color-text)] font-sans" style="background-color: var(--color-background);">
-	<header class="px-8 py-6 shadow-md mb-8 text-white" style="background-color: var(--color-primary);">
+	<header class="px-8 py-6 shadow-md mb-8 flex justify-between" style="background-color: var(--color-primary)">
+    <div class="headerText">
 		<h1 class="text-2xl font-semibold">Welcome to your journal</h1>
 		<p class="text-sm opacity-90">Logged in as: {userId}</p>
+  </div>
+  <div class="headerBtns">
+    <button onclick={goto('/logout')}>
+      Log Out
+    </button>
+    <button onclick={goto('/journal/calendar')}>
+      Calendar
+    </button>
+  </div>
 	</header>
 
 	<section class="max-w-3xl mx-auto px-6">
@@ -63,7 +74,7 @@
 				</ul>
 			</div>
 		{:else}
-			<form on:submit|preventDefault={handleSubmit}
+			<form onsubmit={handleSubmit}
 				class="p-6 rounded-xl shadow-md border flex flex-col gap-4"
 				style="background-color: var(--color-surface); border-color: var(--color-accent);">
 				

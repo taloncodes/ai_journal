@@ -44,6 +44,8 @@
 		{#if form?.error}
 			<p class="text-red-600 text-center">{form.error}</p>
 		{/if}
+
+    <div class="text-center"><p>Already have an account? <a class="!text-[var(--color-primary-dark)]" href="/login">Click here to login</a></p></div>
 	</div>
 </main>
 

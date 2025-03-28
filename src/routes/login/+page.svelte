@@ -40,8 +40,10 @@
     
 
 		{#if form?.error}
-			<p class="text-red-600 text-center">{form.error}</p>
+			<p class="text-center">{form.error}</p>
 		{/if}
+
+    <div class="text-center"><p>Don't have an account yet? <a class="!text-[var(--color-primary-dark)]" href="/signup">Create one here</a></p></div>
 	</div>
 </main>
 

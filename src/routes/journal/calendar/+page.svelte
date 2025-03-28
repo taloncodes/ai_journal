@@ -13,6 +13,8 @@
       entries = data.entries;
     }
   </script>
+
+  <h1>Use the date picker to view your previous journal entries</h1>
   
   <input type="date" bind:value={selectedDate} onchange={fetchEntries} />
   
