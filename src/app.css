@@ -1,4 +1,13 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+:root {
+    --color-background: #f4f7f6;
+    --color-surface: #ffffff;
+    --color-primary: #7da27d;
+    --color-primary-dark: #648d64;
+    --color-accent: #b2a7a0;
+    --color-text: #2c2c2c;
+  }
 
 input{
     border: solid black 1px;
@@ -8,3 +17,22 @@ button{
     border: solid black 1px;
 }
 
+body{
+    background-color: var(--color-background);
+}
+
+input{
+    border: solid var(--color-primary-dark) 1px;
+    border-radius: 5px;
+}
+
+* {
+    color: var(--color-text);
+}
+
+label{
+    color: var(--color-text);
+}
+
+
+  
