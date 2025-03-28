@@ -2,7 +2,7 @@
 	let { form } = $props();
 </script>
 
-<main class="flex justify-center items-center h-dvh bg-background text-text font-sans">
+<main class="flex justify-center items-center h-dvh bg-background text-text">
 	<div class="card w-[500px] h-[500px] bg-surface rounded-2xl border-[var(--color-primary-dark)] border-1 shadow-md p-8 flex flex-col justify-center gap-6">
 
 		<h1 class="text-2xl font-semibold text-primary text-center">Welcome Back</h1>
@@ -15,8 +15,7 @@
 					type="email"
 					name="email"
 					required
-					class="p-2 border border-accent rounded-md bg-white text-text focus:outline-primary"
-				/>
+					class="p-2 border border-accent rounded-md bg-white text-text focus:outline-primary"/>
 			</div>
 
 			<div class="flex flex-col gap-1">
@@ -26,14 +25,12 @@
 					type="password"
 					name="password"
 					required
-					class="p-2 border border-accent rounded-md bg-white text-text focus:outline-primary"
-				/>
+					class="p-2 border border-accent rounded-md bg-white text-text focus:outline-primary"/>
 			</div>
 
 			<button
 				type="submit"
-				class="mt-4 bg-primary hover:bg-primary-dark text-accent px-4 py-2 rounded-lg self-center transition-colors"
-			>
+				class="mt-4 bg-primary hover:bg-primary-dark text-accent px-4 py-2 rounded-lg self-center transition-colors">
 				Log in
 			</button>
 		</form>

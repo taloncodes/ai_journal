@@ -45,21 +45,8 @@
 	}
 </script>
 
-<main class="min-h-screen pb-20 text-[var(--color-text)] font-sans" style="background-color: var(--color-background);">
-	<header class="px-8 py-6 shadow-md mb-8 flex justify-between" style="background-color: var(--color-primary)">
-    <div class="headerText">
-		<h1 class="text-2xl font-semibold">Welcome to your journal</h1>
-		<p class="text-sm opacity-90">Logged in as: {userId}</p>
-  </div>
-  <div class="headerBtns">
-    <button onclick={goto('/logout')}>
-      Log Out
-    </button>
-    <button onclick={goto('/journal/calendar')}>
-      Calendar
-    </button>
-  </div>
-	</header>
+<main class="min-h-screen pb-20 text-[var(--color-text)]" style="background-color: var(--color-background);">
+	
 
 	<section class="max-w-3xl mx-auto px-6">
 		{#if alreadySubmitted}

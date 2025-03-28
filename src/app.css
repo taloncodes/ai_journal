@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-    --color-background: #f4f7f6;
+    --color-background: #e7ebe5;
     --color-surface: #ffffff;
     --color-primary: #7da27d;
     --color-primary-dark: #648d64;
@@ -19,6 +19,9 @@ button{
 
 body{
     background-color: var(--color-background);
+    font-family: "playwrite-cc-gb-j", sans-serif;
+    font-weight: 100;
+    font-style: normal;
 }
 
 input{
@@ -32,6 +35,12 @@ input{
 
 label{
     color: var(--color-text);
+}
+
+li {
+    font-family: "adelle-sans", sans-serif;
+    font-weight: 100;
+    font-style: normal;
 }
 
 

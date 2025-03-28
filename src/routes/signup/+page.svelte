@@ -4,7 +4,7 @@
 	let password = $state('');
 </script>
 
-<main class="flex justify-center items-center h-dvh bg-background text-text font-sans">
+<main class="flex justify-center items-center h-dvh bg-background text-text">
 	<div class="card w-[500px] h-[500px] bg-surface rounded-2xl border-[var(--color-primary-dark)] border-1 shadow-md p-8 flex flex-col justify-center gap-6">
 		<h1 class="text-2xl font-semibold text-primary text-center">Create an Account</h1>
 
@@ -35,8 +35,7 @@
 
 			<button
 				type="submit"
-				class="mt-4 bg-primary hover:bg-primary-dark text-accent px-4 py-2 rounded-lg self-center transition-colors"
-			>
+				class="mt-4 bg-primary hover:bg-primary-dark text-accent px-4 py-2 rounded-lg self-center transition-colors">
 				Sign up
 			</button>
 		</form>
