@@ -20,12 +20,12 @@ async function handleDelete(){
       <p class="mb-6">This action cannot be undone. Are you sure you want to continue?</p>
       <div class="flex justify-center gap-4">
         <button
-          class="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+          class="bg-red-400 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition"
           onclick={handleDelete}>
           Yes, delete it
         </button>
         <button
-          class="bg-gray-300 text-text px-4 py-2 rounded hover:bg-gray-400 transition"
+          class="bg-gray-300 text-text px-4 py-2 rounded-xl hover:bg-gray-400 transition"
           onclick={visible = false}>
           Cancel
         </button>

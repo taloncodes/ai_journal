@@ -59,9 +59,9 @@
 	<section class="max-w-3xl mx-auto px-6">
 		{#if alreadySubmitted}
 
-		<h1 class="text-xl font-semibold text-primary text-center mb-8"> You've already submitted an entry today, come back tomorrow to add a new one!</h1>
+		<h1 class="text-2xl font-semibold text-primary text-center mb-8 mt-8"> You've already submitted an entry today, come back tomorrow to add a new one!</h1>
 			<div class="p-6 rounded-xl shadow-md border" style="background-color: var(--color-surface); border-color: var(--color-accent);">
-				<h2 class="text-lg font-semibold mb-4" style="color: var(--color-primary);">Today's entry...</h2>
+				<h2 class="text-xl font-semibold mb-4" style="color: var(--color-primary);">Today's entry...</h2>
 				<ul class="space-y-2">
 					<li><strong>Gratitude:</strong> {entry.gratitude}</li>
 					<li><strong>Challenge:</strong> {entry.challenge}</li>
@@ -71,7 +71,7 @@
 				</ul>
 			</div>
 
-			<button onclick={goto('/journal/pages')} class="viewmoreBtn block m-auto">
+			<button onclick={goto('/journal/pages')} class="viewmoreBtn block m-auto transition-all hover:scale-110">
 				View Previous Entries
 			</button>
 		{:else}
@@ -161,10 +161,10 @@
 			<div class="mt-8 p-6 rounded-xl shadow border"
 				style="background-color: var(--color-surface); border-color: var(--color-primary);">
 				<h2 class="text-lg font-semibold mb-2" style="color: var(--color-primary);">AI Reflection</h2>
-				<p>{aiResponse}</p>
+				<p class="ai-response">{aiResponse}</p>
 			</div>
 
-			<button onclick={goto('/journal/pages')} class="viewmoreBtn block m-auto">
+			<button onclick={goto('/journal/pages')} class="viewmoreBtn block m-auto transition-all hover:scale-110">
 				View Previous Entries
 			</button>
 		{/if}
@@ -187,9 +187,16 @@
 		font-family: "playwrite-cc-gb-j", sans-serif;
 		font-weight: 400;
 		font-style: normal;
+		font-size: larger;
 	}
 
 	label {
 		font-weight: 400;
+	}
+
+	.ai-response{
+		font-family: "adelle-sans", sans-serif;
+		font-weight: 100;
+		font-style: normal;
 	}
 </style>

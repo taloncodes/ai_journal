@@ -8,7 +8,7 @@
 </script>
 
 
-<header class="px-8 py-6 shadow-md mb-8 flex justify-between" style="background-color: var(--color-primary)">
+<header class="px-8 py-6 shadow-md flex justify-between" style="background-color: var(--color-primary)">
     <div class="headerText">
 		<h1 class="text-2xl font-semibold">Welcome to your journal</h1>
 		<p class="text-sm opacity-90">Logged in as: {userId} </p>

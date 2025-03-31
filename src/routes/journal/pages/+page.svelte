@@ -77,6 +77,13 @@
 
 	{#if !isModalOpen}
 	<section class="max-w-3xl mx-auto px-6 pt-8 flex flex-col gap-6">
+		
+		{#if entries.length}
+
+		<h1 class="text-2xl font-semibold text-primary text-center">
+			Journal Entry: {selectedDate}
+		</h1>
+
 		<p class="text-xl font-semibold text-primary text-center">
 			Choose a different date to view previous entries
 		</p>
@@ -90,15 +97,7 @@
 				style="border-color: var(--color-accent);"
 			/>
 		</div>
-
-		
-
-		{#if entries.length}
-
-		<h1 class="text-2xl font-semibold text-primary text-center">
-			Journal Entry: {selectedDate}
-		</h1>
-			<div class="space-y-6 mt-6">
+			<div class="space-y-6 mt-2">
 					<div
 						class="p-6 rounded-xl shadow border"
 						style="background-color: var(--color-surface); border-color: var(--color-accent);">
@@ -112,7 +111,7 @@
 					</div>
 			</div>
 
-      	<div class="space-y-6 mt-6">
+      	<div class="space-y-6">
 
 			<h2 class="text-2xl font-semibold text-primary text-center">
 				Reflection
@@ -121,17 +120,42 @@
 
 				
 
-				{#if !entries[0].review}
-				<form onsubmit={handleSubmit}>
-				<label for="review"> Would you like to add any retrospective thoughts to this entry?</label>
-				<input id="review" name="review" type="textarea" placeholder="e.g. how you have progressed or reponsded to feedback" style="width: 100%; height:150px">
-				<button type="submit">Add review</button>
-				<input type="hidden" id="selectedEntry" name="selectedEntry" value={selectedDate}/>
-				</form>
+					{#if !entries[0].review}
+					<form
+					  onsubmit={handleSubmit}
+					  class="flex flex-col gap-4 mt-4">
+					  <label
+						for="review"
+						class="text-lg"
+						style="color: var(--color-primary-dark);">
+						Would you like to add any retrospective thoughts to this entry?
+					  </label>
+					
+					  <textarea
+						id="review"
+						name="review"
+						bind:this={review}
+						placeholder="e.g. how you have progressed or responded to feedback"
+						required
+						class="w-full p-3 border rounded-md resize-none"
+						style="height: 150px; border-color: var(--color-accent); background-color: white; color: var(--color-text);"
+					  ></textarea>
+					
+					  <button
+						type="submit"
+						class="px-4 py-2 rounded-lg self-start transition-colors text-white"
+						style="background-color: var(--color-primary);"
+					  >
+						Add review
+					  </button>
+					
+					  <input type="hidden" name="selectedEntry" value={selectedDate} />
+					</form>
+					
 				
 				{:else}
 
-				<p>{entries[0].review}</p>
+				<p class="retrospect">{entries[0].review}</p>
 
 				{/if}
 			</div>
@@ -152,5 +176,24 @@
 <style>
 	:global(.no-scroll){
 		overflow: hidden !important;
+	}
+
+	li strong{
+		color: var(--color-primary);
+		font-family: "playwrite-cc-gb-j", sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: larger;
+	}
+
+	label {
+		font-weight: 400;
+	}
+
+	.retrospect{
+		font-family: "adelle-sans", sans-serif;
+		font-weight: 100;
+		font-style: normal;
+
 	}
 </style>
