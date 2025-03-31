@@ -1,9 +1,14 @@
 <script>
     import { goto } from '$app/navigation';
-	import '../../app.css';
+	  import '../../app.css';
+    import { page } from '$app/state';
 
-	let { children, data } = $props();
+    const currentPath = $derived(page.url.pathname);
+
+
+    let { children, data } = $props();
     let userId = data.userId;
+    
 
 </script>
 
@@ -14,10 +19,15 @@
 		<p class="text-sm opacity-90">Logged in as: {userId} </p>
   </div>
   <div class="headerBtns">
-    <button onclick={() => goto('/journal')}>
+    <button onclick={() => goto('/journal')}
+      class:selected={currentPath === '/journal'}
+      >
       New
     </button>
-    <button onclick={() => goto('/journal/pages')}>
+    <button 
+      onclick={() => goto('/journal/pages')}
+      class:selected={currentPath === '/journal/pages'}
+      >
       Pages
     </button>
     <button onclick={() => goto('/logout')}>
@@ -42,4 +52,9 @@
     .headerBtns Button:hover{
         transform: scale(1.1);
     }
+
+    .headerBtns button.selected {
+    background-color: var(--color-accent);
+    color: var(--color-text);
+}
 </style>
