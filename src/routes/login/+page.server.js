@@ -30,7 +30,7 @@ export const actions = {
       path: '/',
       httpOnly: true,
       sameSite: 'strict',
-      secure: false, // set true in production
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60 * 24 * 7 // 1 week
     });
 
