@@ -167,7 +167,17 @@
 
 
 		{:else if selectedDate}
-			<p class="text-center text-accent mt-4">No entries found for that date.</p>
+			<h1 class="text-2xl font-semibold text-primary text-center">No entries found for that date</h1>
+			<p class="text-xl font-semibold text-primary text-center">Please try a different date using the date picker below.</p>
+			<div class="flex justify-center">
+				<input
+					type="date"
+					bind:value={selectedDate}
+					onchange={fetchEntries}
+					class="border rounded-md p-2 bg-white text-text"
+					style="border-color: var(--color-accent);"
+				/>
+			</div>
 		{/if}
 	</section>
 	{/if}
