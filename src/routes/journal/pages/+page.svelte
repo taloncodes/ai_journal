@@ -1,7 +1,11 @@
 <script>
+	import { invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import Modal from '$lib/components/Modal.svelte';
+
 
 	let entries = $state([]);
+	let isModalOpen = $state(false);
 
 	function formatDateLocal(date) {
 		const year = date.getFullYear();
@@ -13,7 +17,7 @@
 	const today = formatDateLocal(new Date());
 	let selectedDate = $state(today);
 
-	async function fetchEntries() {
+	const fetchEntries = async function () {
 		const res = await fetch('/api/entries', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -38,6 +42,10 @@
     await fetchEntries();
   }
 
+  function confirmDelete(){
+	isModalOpen = true;
+  }
+
   async function deleteEntry(){
 	await fetch('/api/delete', {
 		method: 'POST',
@@ -48,16 +56,30 @@
 	});
 
 	await fetchEntries();
+	await invalidateAll();
   }
 
 	onMount(fetchEntries);
+
+	$effect(() => {
+	if (isModalOpen) {
+		document.body.classList.add('no-scroll');
+	} else {
+		document.body.classList.remove('no-scroll');
+	}
+	});
+	
 </script>
 
 <main class="min-h-screen pb-20 text-[var(--color-text)]" style="background-color: var(--color-background);">
+
+	<Modal bind:visible={isModalOpen} { deleteEntry }/>
+
+	{#if !isModalOpen}
 	<section class="max-w-3xl mx-auto px-6 pt-8 flex flex-col gap-6">
-		<h1 class="text-2xl font-semibold text-primary text-center">
-			View Past Journal Entries
-		</h1>
+		<p class="text-xl font-semibold text-primary text-center">
+			Choose a different date to view previous entries
+		</p>
 
 		<div class="flex justify-center">
 			<input
@@ -73,9 +95,9 @@
 
 		{#if entries.length}
 
-		<h2 class="text-2xl font-semibold text-primary text-center">
+		<h1 class="text-2xl font-semibold text-primary text-center">
 			Journal Entry: {selectedDate}
-		</h2>
+		</h1>
 			<div class="space-y-6 mt-6">
 					<div
 						class="p-6 rounded-xl shadow border"
@@ -114,7 +136,7 @@
 				{/if}
 			</div>
 
-			<button class="p-2 !border-[var(--color-text)] bg-red-400 rounded-xl block m-auto transition-all hover:scale-110" onclick={deleteEntry}>
+			<button class="p-2 !border-[var(--color-text)] bg-red-400 rounded-xl block m-auto transition-all hover:scale-110" onclick={confirmDelete}>
 				<strong>DELETE ENTRY</strong>
 			</button>
 		</div>
@@ -124,4 +146,11 @@
 			<p class="text-center text-accent mt-4">No entries found for that date.</p>
 		{/if}
 	</section>
+	{/if}
 </main>
+
+<style>
+	:global(.no-scroll){
+		overflow: hidden !important;
+	}
+</style>

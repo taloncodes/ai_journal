@@ -14,6 +14,9 @@
 		<p class="text-sm opacity-90">Logged in as: {userId} </p>
   </div>
   <div class="headerBtns">
+    <button onclick={() => goto('/journal')}>
+      New
+    </button>
     <button onclick={() => goto('/journal/pages')}>
       Pages
     </button>

@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
+	import { invalidateAll } from '$app/navigation';
 
 	let { data } = $props();
 	let gratitude = $state('');
@@ -9,8 +10,8 @@
 	let feeling = $state(5);
 	let aiResponse = $state('');
 	let userId = data.userId;
-	let alreadySubmitted = data.alreadySubmitted;
-	let entry = data.entry;
+	let alreadySubmitted = $state(data.alreadySubmitted);
+	let entry = $state(data.entry);
 	let loading = $state(false);
 
 	async function handleSubmit() {
@@ -46,7 +47,9 @@
 			})
 		});
 
+		await invalidateAll();
 		loading = false;
+
 	}
 </script>
 
@@ -55,8 +58,10 @@
 
 	<section class="max-w-3xl mx-auto px-6">
 		{#if alreadySubmitted}
+
+		<h1 class="text-xl font-semibold text-primary text-center mb-8"> You've already submitted an entry today, come back tomorrow to add a new one!</h1>
 			<div class="p-6 rounded-xl shadow-md border" style="background-color: var(--color-surface); border-color: var(--color-accent);">
-				<h2 class="text-lg font-semibold mb-4" style="color: var(--color-primary);">You've already submitted today's entry:</h2>
+				<h2 class="text-lg font-semibold mb-4" style="color: var(--color-primary);">Today's entry...</h2>
 				<ul class="space-y-2">
 					<li><strong>Gratitude:</strong> {entry.gratitude}</li>
 					<li><strong>Challenge:</strong> {entry.challenge}</li>
@@ -65,13 +70,19 @@
 					<li><strong>AI Summary:</strong> {entry.aiResponse}</li>
 				</ul>
 			</div>
+
+			<button onclick={goto('/journal/pages')} class="viewmoreBtn block m-auto">
+				View Previous Entries
+			</button>
 		{:else}
+
+		<h1 class="text-xl font-semibold text-primary text-center mb-8"> Add a journal entry for today</h1>
 			<form onsubmit={handleSubmit}
 				class="p-6 rounded-xl shadow-md border flex flex-col gap-4"
 				style="background-color: var(--color-surface); border-color: var(--color-accent);">
 				
 				<div>
-					<label for="gratitude" class="text-sm" style="color: var(--color-accent);">
+					<label for="gratitude" class="text-lg" style="color: var(--color-primary-dark);">
 						What are you grateful for today?
 					</label>
 					<input
@@ -86,7 +97,7 @@
 				</div>
 
 				<div>
-					<label for="challenge" class="text-sm" style="color: var(--color-accent);">
+					<label for="challenge" class="text-lg" style="color: var(--color-primary-dark);">
 						What was a difficult situation or feeling you experienced today?
 					</label>
 					<input
@@ -101,7 +112,7 @@
 				</div>
 
 				<div>
-					<label for="reflection" class="text-sm" style="color: var(--color-accent);">
+					<label for="reflection" class="text-lg" style="color: var(--color-primary-dark);">
 						What is something you've learned or want to reflect on today?
 					</label>
 					<input
@@ -116,7 +127,7 @@
 				</div>
 
 				<div>
-					<label for="feeling" class="text-sm" style="color: var(--color-accent);">
+					<label for="feeling" class="text-lg" style="color: var(--color-primary-dark);">
 						How are you feeling?
 					</label>
 					<input
@@ -152,6 +163,33 @@
 				<h2 class="text-lg font-semibold mb-2" style="color: var(--color-primary);">AI Reflection</h2>
 				<p>{aiResponse}</p>
 			</div>
+
+			<button onclick={goto('/journal/pages')} class="viewmoreBtn block m-auto">
+				View Previous Entries
+			</button>
 		{/if}
 	</section>
 </main>
+
+
+<style>
+	.viewmoreBtn{
+		padding: 10px;
+        border-radius: 10px;
+        background-color: var(--color-text);
+		color: var(--color-accent);
+        transition: ease 0.3s;
+		margin-top: 32px;
+	}
+
+	li strong{
+		color: var(--color-primary);
+		font-family: "playwrite-cc-gb-j", sans-serif;
+		font-weight: 400;
+		font-style: normal;
+	}
+
+	label {
+		font-weight: 400;
+	}
+</style>
