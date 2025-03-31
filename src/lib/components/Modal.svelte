@@ -13,7 +13,7 @@ async function handleDelete(){
 
 {#if visible}
 
-<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-3 md:px-0">
     <div class="p-6 rounded-xl shadow-lg max-w-md w-full text-center"
          style="background-color: var(--color-surface); border: 1px solid var(--color-accent); color: var(--color-text);">
       <h1 class="text-xl font-semibold text-primary mb-4">This will permanently delete your entry</h1>
