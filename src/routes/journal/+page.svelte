@@ -76,7 +76,7 @@
 			</button>
 		{:else}
 
-		<h1 class="text-xl font-semibold text-primary text-center mb-8 mt-8"> Add a journal entry for today</h1>
+		<h1 class="text-2xl font-semibold text-primary text-center mb-8 mt-8"> Add a journal entry for today</h1>
 			<form onsubmit={handleSubmit}
 				class="p-6 rounded-xl shadow-md border flex flex-col gap-4"
 				style="background-color: var(--color-surface); border-color: var(--color-accent);">
