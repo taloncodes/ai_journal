@@ -31,11 +31,23 @@
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				review: review.value,
-        selectedDate
+        		selectedDate
 			})
 		});
 
     await fetchEntries();
+  }
+
+  async function deleteEntry(){
+	await fetch('/api/delete', {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			selectedDate
+		})
+	});
+
+	await fetchEntries();
   }
 
 	onMount(fetchEntries);
@@ -57,7 +69,13 @@
 			/>
 		</div>
 
+		
+
 		{#if entries.length}
+
+		<h2 class="text-2xl font-semibold text-primary text-center">
+			Journal Entry: {selectedDate}
+		</h2>
 			<div class="space-y-6 mt-6">
 					<div
 						class="p-6 rounded-xl shadow border"
@@ -72,28 +90,34 @@
 					</div>
 			</div>
 
-      <div class="space-y-6 mt-6">
-					<div
-						class="p-6 rounded-xl shadow border"
-						style="background-color: var(--color-surface); border-color: var(--color-accent);">
+      	<div class="space-y-6 mt-6">
 
-            {#if !entries[0].review}
-            <form onsubmit={handleSubmit}>
-            <label for="review"> Would you like to add any retrospective thoughts to this entry?</label>
-            <input id="review" name="review" type="textarea" placeholder="e.g. how you have progressed or reponsded to feedback" style="width: 100%; height:150px">
-            <button type="submit">Add review</button>
-            <input type="hidden" id="selectedEntry" name="selectedEntry" value={selectedDate}/>
-            </form>
-            
-            {:else}
-            <p>{entries[0].review}</p>
-
-            {/if}
-
+			<h2 class="text-2xl font-semibold text-primary text-center">
+				Reflection
+			</h2>
+				<div class="p-6 rounded-xl shadow border" style="background-color: var(--color-surface); border-color: var(--color-accent);">
 
 				
-					</div>
+
+				{#if !entries[0].review}
+				<form onsubmit={handleSubmit}>
+				<label for="review"> Would you like to add any retrospective thoughts to this entry?</label>
+				<input id="review" name="review" type="textarea" placeholder="e.g. how you have progressed or reponsded to feedback" style="width: 100%; height:150px">
+				<button type="submit">Add review</button>
+				<input type="hidden" id="selectedEntry" name="selectedEntry" value={selectedDate}/>
+				</form>
+				
+				{:else}
+
+				<p>{entries[0].review}</p>
+
+				{/if}
 			</div>
+
+			<button class="p-2 !border-[var(--color-text)] bg-red-400 rounded-xl block m-auto transition-all hover:scale-110" onclick={deleteEntry}>
+				<strong>DELETE ENTRY</strong>
+			</button>
+		</div>
 
 
 		{:else if selectedDate}

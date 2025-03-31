@@ -11,8 +11,11 @@
 	let userId = data.userId;
 	let alreadySubmitted = data.alreadySubmitted;
 	let entry = data.entry;
+	let loading = $state(false);
 
 	async function handleSubmit() {
+		aiResponse = '';
+		loading = true;
 		const prompt = `
     You are a journaling assistant. Based on the user's entries, write a kind and positive reflection on the day. End with one small suggestion for tomorrow.
 
@@ -42,6 +45,8 @@
 				aiResponse
 			})
 		});
+
+		loading = false;
 	}
 </script>
 
@@ -129,14 +134,19 @@
 
 				<button
 					type="submit"
-					class="px-4 py-2 rounded-lg self-start transition-colors mt-2 text-white"
+					class="px-4 py-2 rounded-lg self-start transition-colors mt-2 text-white disabled:opacity-50 disabled:cursor-not-allowed" disabled={loading || aiResponse}
 					style="background-color: var(--color-primary);">
 					Submit
 				</button>
 			</form>
 		{/if}
 
-		{#if aiResponse}
+		{#if loading}
+		<div class="mt-8 p-6 rounded-xl text-center text-accent">
+			<p>✨ Generating your AI reflection...</p>
+		</div>
+
+		{:else if aiResponse}
 			<div class="mt-8 p-6 rounded-xl shadow border"
 				style="background-color: var(--color-surface); border-color: var(--color-primary);">
 				<h2 class="text-lg font-semibold mb-2" style="color: var(--color-primary);">AI Reflection</h2>

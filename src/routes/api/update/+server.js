@@ -13,7 +13,6 @@ export async function POST({request, cookies}) {
     const body = await request.json();
     const { review, selectedDate } = body;
 
-    console.log(await body);
 
     //handle function here
     const db = await connectToDB();
