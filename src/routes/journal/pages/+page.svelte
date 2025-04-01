@@ -15,12 +15,14 @@
 	}
 
 	function formatDatePretty(date){
-	const prettyDate = date.toLocaleDateString("en-GB", { 
-    day: "numeric", 
-    month: "long", 
-    year: "numeric" 
-	}).replace(/\b1\b/, "1st").replace(/\b2\b/, "2nd").replace(/\b3\b/, "3rd").replace(/\b(\d{1,2})\b/, "$1th");
-	return prettyDate
+		const d = new Date(date);
+		const prettyDate = d.toLocaleDateString("en-GB", { 
+		day: "numeric", 
+		month: "long", 
+		year: "numeric" 
+		}).replace(/\b1\b/, "1st").replace(/\b2\b/, "2nd").replace(/\b3\b/, "3rd").replace(/\b(\d{1,2})\b/, "$1th");
+		
+		return prettyDate
 	}
 
 	const today = formatDateLocal(new Date());
@@ -86,18 +88,16 @@
 
 	{#if !isModalOpen}
 	<section class="max-w-3xl mx-auto px-6 pt-8 flex flex-col gap-6">
-		
-		{#if entries.length}
 
 		<h1 class="text-2xl font-semibold text-primary text-center">
 			You can add additional reflections to past entries or delete them entirely
 		</h1>
+		
+		{#if entries.length}
 
 		<p class="text-xl font-semibold text-primary text-center">
 			Select a date to revisit journal pages
 		</p>
-
-		
 
 		<div class="flex justify-center">
 			<input
@@ -109,9 +109,9 @@
 			/>
 		</div>
 
-		<p class="text-xl font-semibold text-primary text-center">
+		<h2 class="text-2xl font-semibold text-primary text-center">
 			Journal entry: {formatDatePretty(selectedDate)}
-		</p>
+		</h2>
 			<div class="space-y-6 mt-2">
 					<div
 						class="p-6 rounded-xl shadow border"
@@ -182,7 +182,7 @@
 
 
 		{:else if selectedDate}
-			<h1 class="text-2xl font-semibold text-primary text-center">No entries found for that date</h1>
+			<p class="text-xl font-semibold text-primary text-center">No entries found for selected date</p>
 			<p class="text-xl font-semibold text-primary text-center">Please try a different date using the date picker below.</p>
 			<div class="flex justify-center">
 				<input
