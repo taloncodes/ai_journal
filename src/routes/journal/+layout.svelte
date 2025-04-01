@@ -14,7 +14,7 @@
 <header class="px-8 py-6 shadow-md flex justify-between items-center flex-wrap" style="background-color: var(--color-primary)">
 	<div class="headerText">
 		<h1 class="text-2xl font-semibold">Welcome to your journal</h1>
-		<p class="text-md lg:text:sm opacity-90">Reflect and reset with your AI powered journal</p>
+		<p class="text-md lg:text:sm opacity-90">Take time to reflect and reset</p>
 	</div>
 
 
