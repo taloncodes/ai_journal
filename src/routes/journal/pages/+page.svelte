@@ -14,6 +14,15 @@
 		return `${year}-${month}-${day}`;
 	}
 
+	function formatDatePretty(date){
+	const prettyDate = date.toLocaleDateString("en-GB", { 
+    day: "numeric", 
+    month: "long", 
+    year: "numeric" 
+	}).replace(/\b1\b/, "1st").replace(/\b2\b/, "2nd").replace(/\b3\b/, "3rd").replace(/\b(\d{1,2})\b/, "$1th");
+	return prettyDate
+	}
+
 	const today = formatDateLocal(new Date());
 	let selectedDate = $state(today);
 
@@ -81,12 +90,14 @@
 		{#if entries.length}
 
 		<h1 class="text-2xl font-semibold text-primary text-center">
-			Journal Entry: {selectedDate}
+			You can add additional reflections to past entries or delete them entirely
 		</h1>
 
 		<p class="text-xl font-semibold text-primary text-center">
-			Choose a different date to view previous entries
+			Select a date to revisit journal pages
 		</p>
+
+		
 
 		<div class="flex justify-center">
 			<input
@@ -97,6 +108,10 @@
 				style="border-color: var(--color-accent);"
 			/>
 		</div>
+
+		<p class="text-xl font-semibold text-primary text-center">
+			Journal entry: {formatDatePretty(selectedDate)}
+		</p>
 			<div class="space-y-6 mt-2">
 					<div
 						class="p-6 rounded-xl shadow border"
