@@ -54,13 +54,20 @@
 		background-color: var(--color-text);
 		color: var(--color-accent);
 		transition: ease 0.3s;
-		margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
 	}
 
   @media (min-width: 1024px) {
 	.headerBtns button:hover {
 		transform: scale(1.1);
 	}
+  .headerBtns button{
+    margin-left: 5px;
+    margin-right: 5px;
+
+  }
 }
 
 
