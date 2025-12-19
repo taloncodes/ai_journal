@@ -17,7 +17,7 @@ export async function POST({ request }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'deepseek/deepseek-r1:free',
+        model: 'deepseek/deepseek-r1-0528:free',
         messages: [
           {
             role: 'user',
@@ -28,6 +28,7 @@ export async function POST({ request }) {
     });
   
     const data = await response.json();
+    console.log(data);
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
